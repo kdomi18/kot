@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Crop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CropController extends Controller
 {
@@ -25,7 +26,7 @@ class CropController extends Controller
     }
 
     public function getCrop(){
-        $crops = Crop::orderBy('id')->get();
+        $crops = DB::table('crops')->paginate(15);
         return view("crop.crop", compact('crops'));
     }
 

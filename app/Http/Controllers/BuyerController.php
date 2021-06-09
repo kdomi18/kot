@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buyer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BuyerController extends Controller
 {
@@ -28,7 +29,7 @@ class BuyerController extends Controller
     }
 
     public function getBuyer(){
-        $buyers = Buyer::orderBy('id')->get();
+        $buyers = DB::table('buyers')->paginate(15);
         return view("market.market", compact('buyers'));
     }
 
