@@ -1,8 +1,10 @@
 <?php
 
+use Admin\UserController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\CropController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +44,14 @@ Route::get('/vet', function () {
     return view('vet');
 })->middleware(['auth'])->name('vet');
 
-Route::get('/users', function () {
-    return view('users');
-})->middleware(['auth'])->name('users');
+//Route::get('/users', function () {
+//    return view('users');
+//})->middleware(['auth'])->name('users');
+
+// manager routes
+Route::prefix('manager')->middleware(['auth', 'auth.isManagerOrOwner'])->name('manager.')->group(function (){
+    Route::resource('/users', UserController::class);
+});
 
 // crop routes
 Route::get("/crop/add-crop", [CropController::class, 'addCrop'])->middleware(['auth'])->name('add.crop');

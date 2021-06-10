@@ -16,7 +16,7 @@
                         @if(Session::has("crop_deleted"))
                             <div class="alert alert-success">{{Session::get("crop_deleted")}}</div>
                         @endif
-                        <table class="table table-fixed">
+                        <table class="table table-auto">
                             <thead>
                             <tr>
                                 <th>ID</th>

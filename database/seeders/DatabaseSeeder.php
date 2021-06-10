@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // first create roles as we need to use them below
+        $this->call(RoleSeeder::class);
+
+        // create the main admin with email admin@admin.com and password password
+        DB::table('users')->insert([
+            'name' => 'Kejdi Domi',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password')
+        ]);
+
+        // assign the role of manager to the created admin
+        DB::table('role_user')->insert([
+            'id' => '1',
+            'role_id' => '1',
+            'user_id' => '1'
+        ]);
+
+        //seed 20 more users
+        $this->call(UserSeeder::class);
+        //randomly assign roles to users
+        $this->call(RoleUserSeeder::class);
+
+        // create crops and buyers
         $faker = Faker::create();
 
         foreach (range(1,200) as $index) {
