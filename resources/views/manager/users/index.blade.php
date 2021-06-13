@@ -46,20 +46,23 @@
                                         <td>
                                             <a href="{{ route("manager.users.edit", $user->id) }}"
                                                class="btn btn-primary">Edit</a>
-                                            <button class="btn btn-danger"
-                                                    onclick="event.preventDefault();
-                                                        document.getElementById('delete-user-form-{{ $user->id }}').submit()"
-                                            >
-                                                Delete
-                                            </button>
-                                            <form id="delete-user-form-{{ $user->id }}"
-                                                  action="{{ route("manager.users.destroy", $user->id) }}" method="post"
-                                                  style="display: none">
-                                                @csrf
-                                                @method("DELETE")
+                                            @if($user->id != auth()->user()->id)
+                                                <button class="btn btn-danger"
+                                                        onclick="event.preventDefault();
+                                                            document.getElementById('delete-user-form-{{ $user->id }}').submit()"
+                                                >
+                                                    Delete
+                                                </button>
 
-                                            </form>
+                                                <form id="delete-user-form-{{ $user->id }}"
+                                                      action="{{ route("manager.users.destroy", $user->id) }}"
+                                                      method="post"
+                                                      style="display: none">
+                                                    @csrf
+                                                    @method("DELETE")
 
+                                                </form>
+                                            @endif
                                         </td>
                                     @endcan
                                 </tr>

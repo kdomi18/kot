@@ -4,7 +4,8 @@
 <div>
     <x-label for="name" :value="__('Name')"/>
 
-    <input id="name" class="block mt-1 w-full" type="text" name="name" @isset($user) value="{{$user->name}}@endisset" required
+    <input id="name" class="block mt-1 w-full" type="text" name="name" @isset($user) value="{{$user->name}}@endisset"
+           required
            autofocus/>
 </div>
 
@@ -12,7 +13,8 @@
 <div class="mt-4">
     <x-label for="email" :value="__('Email')"/>
 
-    <input id="email" class="block mt-1 w-full" type="email" name="email" @isset($user)value="{{$user->email}}@endisset" required/>
+    <input id="email" class="block mt-1 w-full" type="email" name="email" @isset($user)value="{{$user->email}}@endisset"
+           required/>
 </div>
 
 <!-- Password -->
@@ -22,8 +24,7 @@
 
         <x-input id="password" class="block mt-1 w-full"
                  type="password"
-                 name="password"
-                 required autocomplete="new-password"></x-input>
+                 name="password" required autocomplete="new-password"></x-input>
     </div>
 
     <!-- Confirm Password -->

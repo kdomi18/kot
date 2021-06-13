@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -49,7 +49,7 @@ Route::get('/vet', function () {
 //})->middleware(['auth'])->name('users');
 
 // manager routes
-Route::prefix('manager')->middleware(['auth', 'auth.isManagerOrOwner'])->name('manager.')->group(function (){
+Route::prefix('manager')->middleware(['auth', 'auth.isManagerOrOwner', 'verified'])->name('manager.')->group(function (){
     Route::resource('/users', UserController::class);
 });
 
