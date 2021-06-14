@@ -3,6 +3,7 @@
 use Admin\UserController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\CropController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,10 +45,6 @@ Route::get('/vet', function () {
     return view('vet');
 })->middleware(['auth'])->name('vet');
 
-//Route::get('/users', function () {
-//    return view('users');
-//})->middleware(['auth'])->name('users');
-
 // manager routes
 Route::prefix('manager')->middleware(['auth', 'auth.isManagerOrOwner', 'verified'])->name('manager.')->group(function (){
     Route::resource('/users', UserController::class);
@@ -65,8 +62,17 @@ Route::post("/crop/update-crop", [CropController::class, 'updateCrop'])->name('c
 // buyer routes
 Route::get("/market/add-buyer", [BuyerController::class, 'addBuyer'])->middleware(['auth'])->name('add.buyer');
 Route::post("/market/create-buyer", [BuyerController::class, 'createBuyer'])->name('buyer.create')->middleware(['auth']);
-Route::get('/market/market', [BuyerController::class, "getBuyer"])->middleware(['auth'])->name('market');
+Route::get('/market/buyers', [BuyerController::class, "getBuyer"])->middleware(['auth'])->name('buyers');
 Route::get("/market/buyer/{id}", [BuyerController::class, "getBuyerById"])->middleware(['auth']);
 Route::get("/market/delete-buyer/{id}", [BuyerController::class, "deleteBuyer"])->middleware(['auth']);
 Route::get("/market/edit-buyer/{id}", [BuyerController::class, "editBuyer"])->middleware(['auth']);
 Route::post("/market/update-buyer", [BuyerController::class, 'updateBuyer'])->name('buyer.update')->middleware(['auth']);
+
+// supplier routes
+Route::get("/market/add-supplier", [SupplierController::class, 'addSupplier'])->middleware(['auth'])->name('add.supplier');
+Route::post("/market/create-supplier", [SupplierController::class, 'createSupplier'])->name('supplier.create')->middleware(['auth']);
+Route::get('/market/suppliers', [SupplierController::class, "getSupplier"])->middleware(['auth'])->name('suppliers');
+Route::get("/market/supplier/{id}", [SupplierController::class, "getSupplierById"])->middleware(['auth']);
+Route::get("/market/delete-supplier/{id}", [SupplierController::class, "deleteSupplier"])->middleware(['auth']);
+Route::get("/market/edit-supplier/{id}", [SupplierController::class, "editSupplier"])->middleware(['auth']);
+Route::post("/market/update-supplier", [SupplierController::class, 'updateSupplier'])->name('supplier.update')->middleware(['auth']);

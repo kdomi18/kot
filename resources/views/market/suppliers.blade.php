@@ -1,20 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Market') }}
+            {{ __('Market / Suppliers') }}
         </h2>
+        <a href="buyers" class="btn btn-secondary">Go to Buyers</a>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    resources/views/market.blade.php<br>
+                    resources/views/market/suppliers.blade.php<br>
 
-                    <a href="{{route("add.buyer")}}" class="btn btn-dark">Add new buyer</a>
+                    {{--supplier table--}}
+                    <a href="{{route("add.supplier")}}" class="btn btn-dark">Add new supplier</a>
                     <div class="card-body">
-                        @if(Session::has("buyer_deleted"))
-                            <div class="alert alert-success">{{Session::get("buyer_deleted")}}</div>
+                        @if(Session::has("supplier_deleted"))
+                            <div class="alert alert-success">{{Session::get("supplier_deleted")}}</div>
                         @endif
                         <table class="table table-auto">
                             <thead>
@@ -24,32 +26,32 @@
                                 <th>Surname</th>
                                 <th>Address</th>
                                 <th>Phone</th>
-                                <th>Buys</th>
+                                <th>Supplies</th>
                                 <th>Profit Index</th>
                                 <th>Action</th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($buyers as $buyer)
+                            @foreach($suppliers as $supplier)
                                 <tr>
-                                    <td>{{$buyer->id}}</td>
-                                    <td>{{$buyer->name}}</td>
-                                    <td>{{$buyer->surname}}</td>
-                                    <td>{{$buyer->address}}</td>
-                                    <td>{{$buyer->phone}}</td>
-                                    <td>{{$buyer->buys}}</td>
-                                    <td>{{$buyer->profit_index}}</td>
+                                    <td>{{$supplier->id}}</td>
+                                    <td>{{$supplier->name}}</td>
+                                    <td>{{$supplier->surname}}</td>
+                                    <td>{{$supplier->address}}</td>
+                                    <td>{{$supplier->phone}}</td>
+                                    <td>{{$supplier->supplies}}</td>
+                                    <td>{{$supplier->profit_index}}</td>
                                     <td>
-                                        <a href="/market/buyer/{{$buyer->id}}" class="btn btn-info">Details</a>
-                                        <a href="/market/edit-buyer/{{$buyer->id}}" class="btn btn-primary">Edit</a>
-                                        <a href="/market/delete-buyer/{{$buyer->id}}" class="btn btn-danger">Delete</a>
+                                        <a href="/market/supplier/{{$supplier->id}}" class="btn btn-info">Details</a>
+                                        <a href="/market/edit-supplier/{{$supplier->id}}" class="btn btn-primary">Edit</a>
+                                        <a href="/market/delete-supplier/{{$supplier->id}}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $buyers->links() }}
+                        {{ $suppliers->links() }}
                     </div>
                 </div>
             </div>

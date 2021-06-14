@@ -30,7 +30,7 @@ class BuyerController extends Controller
 
     public function getBuyer(){
         $buyers = DB::table('buyers')->paginate(15);
-        return view("market.market", compact('buyers'));
+        return view("market.buyers", compact('buyers'));
     }
 
     public function getBuyerById($id){
