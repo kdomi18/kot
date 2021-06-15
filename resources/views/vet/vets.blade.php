@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Market') }}
+            {{ __('Vets') }}
         </h2>
     </x-slot>
 
@@ -9,12 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    resources/views/market.blade.php<br>
+                    resources/views/vet/vets.blade.php<br>
 
-                    <a href="{{route("add.buyer")}}" class="btn btn-dark">Add new buyer</a>
+                    {{--vet table--}}
+                    <a href="{{route("add.vet")}}" class="btn btn-dark">Add new vet</a>
                     <div class="card-body">
-                        @if(Session::has("buyer_deleted"))
-                            <div class="alert alert-success">{{Session::get("buyer_deleted")}}</div>
+                        @if(Session::has("vet_deleted"))
+                            <div class="alert alert-success">{{Session::get("vet_deleted")}}</div>
                         @endif
                         <table class="table table-auto">
                             <thead>
@@ -24,33 +25,34 @@
                                 <th>Surname</th>
                                 <th>Address</th>
                                 <th>Phone</th>
-                                <th>Buys</th>
-                                <th>Profit Index</th>
+                                <th>Organization</th>
+                                <th>Other Contact</th>
                                 <th>Action</th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($buyers as $buyer)
+                            @foreach($vets as $vet)
                                 <tr>
-                                    <td>{{$buyer->id}}</td>
-                                    <td>{{$buyer->name}}</td>
-                                    <td>{{$buyer->surname}}</td>
-                                    <td>{{$buyer->address}}</td>
-                                    <td>{{$buyer->phone}}</td>
-                                    <td>{{$buyer->buys}}</td>
-                                    <td>{{$buyer->profit_index}}</td>
+                                    <td>{{$vet->id}}</td>
+                                    <td>{{$vet->name}}</td>
+                                    <td>{{$vet->surname}}</td>
+                                    <td>{{$vet->address}}</td>
+                                    <td>{{$vet->phone}}</td>
+                                    <td>{{$vet->organization}}</td>
+                                    <td>{{$vet->other_contact}}</td>
                                     <td>
-                                        <a href="/market/buyer/{{$buyer->id}}" class="btn btn-info">Details</a>
-                                        <a href="/market/edit-buyer/{{$buyer->id}}" class="btn btn-primary">Edit</a>
-                                        <a href="/market/delete-buyer/{{$buyer->id}}" class="btn btn-danger">Delete</a>
+                                        <a href="/vet/vet/{{$vet->id}}" class="btn btn-info">Details</a>
+                                        <a href="/vet/edit-vet/{{$vet->id}}" class="btn btn-primary">Edit</a>
+                                        <a href="/vet/delete-vet/{{$vet->id}}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $buyers->links() }}
+                        {{ $vets->links() }}
                     </div>
+
                 </div>
             </div>
         </div>
@@ -60,5 +62,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
             crossorigin="anonymous"></script>
-
 </x-app-layout>

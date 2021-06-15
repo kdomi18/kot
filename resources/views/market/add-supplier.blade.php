@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Add-Buyer</title>
+    <title>Add Supplier</title>
 </head>
 <body>
-@if(\Illuminate\Support\Facades\Session::has("buyer_created"))
-    <div class="alert alert-success">{{\Illuminate\Support\Facades\Session::get("buyer_created")}}</div>
+@if(\Illuminate\Support\Facades\Session::has("supplier_created"))
+    <div class="alert alert-success">{{\Illuminate\Support\Facades\Session::get("supplier_created")}}</div>
 @endif
-<form action="{{route('buyer.create')}}" method="post">
+<form action="{{route('supplier.create')}}" method="post">
     @csrf
-    <label for="name">Buyer name</label>
+    <label for="name">Supplier name</label>
     <input type="text" name="name" id="name"><br>
-    <label for="surname">Buyer surname</label>
+    <label for="surname">Supplier surname</label>
     <input type="text" name="surname" id="surname"><br>
-    <label for="organization">Buyer organization</label>
+    <label for="organization">Supplier organization</label>
     <input type="text" name="organization" id="organization"><br>
     <label for="address">Address</label>
     <input type="text" name="address" id="address"><br>
@@ -22,8 +22,8 @@
     <input type="text" name="phone" id="phone"><br>
     <label for="other_contact">Other Contact</label>
     <input type="text" name="other_contact" id="other_contact"><br>
-    <label for="buys">Buys</label>
-    <input type="text" name="buys" id="buys"><br>
+    <label for="supplies">Supplies</label>
+    <input type="text" name="supplies" id="supplies"><br>
     <div class="form-group">
         <label for="profit_index">
             Profit Index
@@ -55,9 +55,9 @@
         </div>
     </div>
     <input type="time" name="relative_distance" id="relative_distance">
-    <button type="submit">Add Buyer</button>
+    <button type="submit">Add Supplier</button>
 </form>
 
-<a href="{{route('buyers')}}">go back</a>
+<a href="{{route('suppliers')}}">go back</a>
 </body>
 </html>

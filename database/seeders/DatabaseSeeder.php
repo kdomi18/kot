@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Vaccine;
+use App\Models\Vet;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -33,15 +35,21 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1'
         ]);
 
-        //seed 20 more users
+        //seed 10 more users
         $this->call(UserSeeder::class);
         //randomly assign roles to users
         $this->call(RoleUserSeeder::class);
 
+        // create 20 vets
+        Vet::factory()->times(20)->create();
+
+        // create 40 vaccinations
+        Vaccine::factory()->times(40)->create();
+
         // create crops and buyers
         $faker = Faker::create();
 
-        foreach (range(1,200) as $index) {
+        foreach (range(1,20) as $index) {
             DB::table('crops')->insert([
                 'name' => $faker->randomElement(['tomatoes', 'potatoes', 'wheat', 'cucumber', 'eggplant', 'cherry']),
                 'quantity' => $faker->randomNumber(2),
@@ -54,7 +62,7 @@ class DatabaseSeeder extends Seeder
 
         $gender = $faker->randomElement(["male", "female"]);
 
-        foreach (range(1,200) as $index){
+        foreach (range(1,20) as $index){
             DB::table('buyers')->insert([
                 'name' => $faker->firstName($gender),
                 'surname' => $faker->lastName,
@@ -63,6 +71,20 @@ class DatabaseSeeder extends Seeder
                 'phone' => substr($faker->phoneNumber, 0,13),
                 'other_contact' => $faker->randomElement(["null", "email@email.com"]),
                 'buys' => $faker->randomElement(["cherries", "tomatoes","potatoes", "calves", "horses"]),
+                'profit_index' => random_int(1,5),
+                'relative_distance' => $faker->time()
+            ]);
+        }
+
+        foreach (range(1,20) as $index){
+            DB::table('suppliers')->insert([
+                'name' => $faker->firstName($gender),
+                'surname' => $faker->lastName,
+                'organization' => $faker->company,
+                'address' => $faker->address,
+                'phone' => substr($faker->phoneNumber, 0,13),
+                'other_contact' => $faker->randomElement(["null", "email@email.com"]),
+                'supplies' => $faker->randomElement(["cherry trees", "tomato seeds","potato seeds", "calves", "horses"]),
                 'profit_index' => random_int(1,5),
                 'relative_distance' => $faker->time()
             ]);
