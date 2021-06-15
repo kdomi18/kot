@@ -27,7 +27,7 @@
                     <x-nav-link :href="route('weather')" :active="request()->routeIs('weather')">
                         {{ __('Weather') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('vet')" :active="request()->routeIs('vet')">
+                    <x-nav-link :href="route('vets')" :active="request()->routeIs('vets')">
                         {{ __('Vets') }}
                     </x-nav-link>
                     @can('is-manager-or-owner')

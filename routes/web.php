@@ -4,6 +4,7 @@ use Admin\UserController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\CropController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\VetController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -41,10 +42,6 @@ Route::get('/weather', function () {
     return view('weather');
 })->middleware(['auth'])->name('weather');
 
-Route::get('/vet', function () {
-    return view('vet');
-})->middleware(['auth'])->name('vet');
-
 // manager routes
 Route::prefix('manager')->middleware(['auth', 'auth.isManagerOrOwner', 'verified'])->name('manager.')->group(function (){
     Route::resource('/users', UserController::class);
@@ -76,3 +73,12 @@ Route::get("/market/supplier/{id}", [SupplierController::class, "getSupplierById
 Route::get("/market/delete-supplier/{id}", [SupplierController::class, "deleteSupplier"])->middleware(['auth']);
 Route::get("/market/edit-supplier/{id}", [SupplierController::class, "editSupplier"])->middleware(['auth']);
 Route::post("/market/update-supplier", [SupplierController::class, 'updateSupplier'])->name('supplier.update')->middleware(['auth']);
+
+// vet routes
+Route::get("/vet/add-vet", [VetController::class, 'addVet'])->middleware(['auth'])->name('add.vet');
+Route::post("/vet/create-vet", [VetController::class, 'createVet'])->name('vet.create')->middleware(['auth']);
+Route::get('/vet/vets', [VetController::class, "getVet"])->middleware(['auth'])->name('vets');
+Route::get("/vet/vet/{id}", [VetController::class, "getVetById"])->middleware(['auth']);
+Route::get("/vet/delete-vet/{id}", [VetController::class, "deleteVet"])->middleware(['auth']);
+Route::get("/vet/edit-vet/{id}", [VetController::class, "editVet"])->middleware(['auth']);
+Route::post("/vet/update-vet", [VetController::class, 'updateVet'])->name('vet.update')->middleware(['auth']);

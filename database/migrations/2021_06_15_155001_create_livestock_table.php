@@ -16,14 +16,22 @@ class CreateLivestockTable extends Migration
         Schema::create('livestock', function (Blueprint $table) {
             $table->id();
             $table->string('tag');
-//            $table->foreign('supplier_id')->references('id')->on('suppliers');
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign('supplier_id')
+                ->references('id')
+                ->on('suppliers')
+                ->onDelete('cascade');
             $table->foreignId('buyer_id')->nullable()->constrained('buyers');
-//            $table->foreign('buyer_id')->references('id')->on('buyers');
             $table->string("relative_id");
             $table->decimal('buying_price', 8,2);
             $table->decimal('selling_price', 8,2)->nullable();
             $table->string('breed');
             $table->boolean('vaccinated');
+            $table->unsignedBigInteger('vaccine_id');
+            $table->foreign('vaccine_id')
+                ->references('id')
+                ->on('vaccines')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

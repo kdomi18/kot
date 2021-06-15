@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Vaccine;
+use App\Models\Vet;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +39,12 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         //randomly assign roles to users
         $this->call(RoleUserSeeder::class);
+
+        // create 20 vets
+        Vet::factory()->times(20)->create();
+
+        // create 40 vaccinations
+        Vaccine::factory()->times(40)->create();
 
         // create crops and buyers
         $faker = Faker::create();
